@@ -1,5 +1,8 @@
 2009-04-18  kimura wataru <kimuraw>
 
+	* sysutils/ruby_select:
+	force any version (delete "none")
+
 	* lang/ruby18/Portfile:
 	correct distname.
 

@@ -27,7 +27,7 @@ configure.args	--mandir=${prefix}/share/man --name=ruby
 # install all files
 post-destroot {
 	xinstall -m 755 -d ${destroot}${prefix}/etc/select/ruby
-	xinstall -m 644 -W ${filespath} base none ruby18 ruby186 \
+	xinstall -m 644 -W ${filespath} base ruby18 ruby186 \
 		${destroot}${prefix}/etc/select/ruby
 }
 
