@@ -1,5 +1,8 @@
 2009-04-18  kimura wataru <kimuraw>
 
+	* lang/ruby18:
+	rename ruby to ruby18.
+
 	* lang/ruby186/Portfile,
 	  lang/ruby186/files/patch-rdoc_sysdir.diff,
 	  lang/ruby186/files/patch-libruby_nosuffix.diff:
