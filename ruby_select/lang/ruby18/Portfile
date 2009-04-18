@@ -18,6 +18,7 @@ homepage		http://www.ruby-lang.org/
 master_sites	ruby:1.8
 				
 dist_subdir		ruby
+distname		ruby-${version}
 checksums		md5 f8ddb886b8a81cf005f53e9a9541091d \
 				rmd160 77469c9c4e9303f2ec8ca72a0cbf98b674cb1415 \
 				sha1 64ed631a819f28d9dd86d2c699e1b0a94d7e5dc9

@@ -12,6 +12,11 @@ task :update do
   sh 'svn update'
 end
 
+desc %Q!generate patchfile to trunk!
+task :gen_patch do
+  sh 'svn diff -r49785:HEAD lang'
+end
+
 namespace "port" do
   desc %Q!"portindex" at top of port-tree!
   task :portindex do
