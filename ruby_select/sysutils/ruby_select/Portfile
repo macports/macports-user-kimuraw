@@ -12,7 +12,7 @@ long_description \
 				ruby_select lets you switch the default ruby interpreter. \
 				ruby_select symlinks the standard ruby executables \
 				in the MacPorts prefix to the selected version. \
-				`ruby_select [ruby186|ruby18|ruby19]'
+				ruby_select [ruby186|ruby18|ruby19]
 
 homepage		http://svn.macports.org/repository/macports/contrib/select/
 master_sites	${homepage}
