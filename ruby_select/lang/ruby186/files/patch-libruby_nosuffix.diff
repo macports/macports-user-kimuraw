@@ -1,0 +1,10 @@
+--- mkconfig.rb.orig	2009-04-18 19:37:13.000000000 +0900
++++ mkconfig.rb	2009-04-18 19:39:14.000000000 +0900
+@@ -150,6 +150,7 @@
+  	CONFIG["sitedir"] = CONFIG["vendordir"]
+  	CONFIG["sitelibdir"] = CONFIG["vendorlibdir"]
+  	CONFIG["sitearchdir"] = CONFIG["vendorarchdir"]
++ 	CONFIG["RUBY_SO_NAME"] = "ruby"
+   end
+   CONFIG["topdir"] = File.dirname(__FILE__)
+   MAKEFILE_CONFIG = {}

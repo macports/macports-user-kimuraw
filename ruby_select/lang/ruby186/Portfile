@@ -43,7 +43,7 @@ patchfiles		patch-Makefile.in \
 				patch-lib-rexml-document.rb.diff \
 				patch-ext_openssl_openssl_missing.h.diff
 
-# change rdoc "system" path to "system1.8.7"
+# change rdoc "system" path to "system1.8.6"
 patchfiles-append patch-rdoc_sysdir.diff
 # linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
 patchfiles-append patch-libruby_nosuffix.diff
@@ -76,7 +76,8 @@ post-destroot {
 		xinstall -m 0755 -d ${libdir}
 
 		# special file for installation control of modules
-		xinstall -m 0644 ${filespath}/${type}-specific.rb ${libdir}
+		xinstall -m 0644 ${filespath}/${type}-specific.rb \
+			${destroot}${prefix}/lib/ruby/${ruby_rel}/
 
 		# prevent empty site/vendor directories from being pruned
 		foreach subdir [exec find ${libdir} -type d -empty] {
