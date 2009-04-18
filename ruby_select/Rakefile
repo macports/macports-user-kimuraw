@@ -1,0 +1,21 @@
+# $Id: Rakefile 831 2008-07-19 13:25:03Z kimuraw $
+# utilitles for development MacPorts portfiles
+
+# 
+require 'fileutils'
+
+# Rake tasks
+task :default => ["port:portindex"]
+
+desc %Q!"svn update" at top of port-tree!
+task :update do
+  sh 'svn update'
+end
+
+namespace "port" do
+  desc %Q!"portindex" at top of port-tree!
+  task :portindex do
+    sh 'portindex'
+  end
+end
+
