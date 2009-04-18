@@ -2,7 +2,7 @@
 
 PortSystem 1.0
 
-name			ruby
+name			ruby18
 version			1.8.7-p160
 
 categories		lang ruby
@@ -85,7 +85,8 @@ post-destroot {
 		xinstall -m 0755 -d ${libdir}
 		
 		# special file for installation control of modules
-		xinstall -m 0644 ${filespath}/${type}-specific.rb ${libdir}
+		xinstall -m 0644 ${filespath}/${type}-specific.rb \
+			${destroot}${prefix}/lib/ruby/${ruby_rel}/
 		
 		# prevent empty site/vendor directories from being pruned
 		foreach subdir [exec find ${libdir} -type d -empty] {
@@ -94,24 +95,24 @@ post-destroot {
 	}
 }
 
-# create symlink for ruby18 and ,...
-# TODO: ruby_select would do this.
-post-activate {
-	foreach cmd {ruby erb irb rdoc ri testrb} {
-		if {![file exists ${prefix}/bin/${cmd}]} {
-			file link -symbolic ${prefix}/bin/${cmd} \
-				${prefix}/bin/${cmd}${suffix}
-		}
-	}
-	if {![file exists ${prefix}/lib/libruby.dylib]} {
-			file link -symbolic ${prefix}/lib/libruby.dylib \
-				${prefix}/lib/libruby${suffix}.dylib
-    }
-	if {![file exists ${prefix}/lib/libruby-static.a]} {
-			file link -symbolic ${prefix}/lib/libruby-static.a \
-				${prefix}/lib/libruby${suffix}-static.a
-    }
-}
+## create symlink for ruby18 and ,...
+## TODO: ruby_select would do this.
+#post-activate {
+#	foreach cmd {ruby erb irb rdoc ri testrb} {
+#		if {![file exists ${prefix}/bin/${cmd}]} {
+#			file link -symbolic ${prefix}/bin/${cmd} \
+#				${prefix}/bin/${cmd}${suffix}
+#		}
+#	}
+#	if {![file exists ${prefix}/lib/libruby.dylib]} {
+#			file link -symbolic ${prefix}/lib/libruby.dylib \
+#				${prefix}/lib/libruby${suffix}.dylib
+#    }
+#	if {![file exists ${prefix}/lib/libruby-static.a]} {
+#			file link -symbolic ${prefix}/lib/libruby-static.a \
+#				${prefix}/lib/libruby${suffix}-static.a
+#    }
+#}
 
 variant universal {
 	configure.args-delete --disable-dependency-tracking
