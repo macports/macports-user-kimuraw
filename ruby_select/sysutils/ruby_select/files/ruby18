@@ -1,0 +1,8 @@
+bin/ruby18
+bin/erb18
+bin/irb18
+bin/rdoc18
+bin/ri18
+bin/testrb18
+lib/libruby18-static.a
+lib/libruby18.dylib

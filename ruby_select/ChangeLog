@@ -1,5 +1,10 @@
 2009-04-18  kimura wataru <kimuraw>
 
+	* sysutils/ruby_select:
+	add a new port. ruby_select is a utility program like gcc_select
+	or python_select.
+	note: ruby18 is only ready for ruby_select.
+
 	* lang/ruby/Portfile, lang/ruby/files/patch-libruby_nosuffix.diff:
 	- use --program-suffix=18
 	- linking libruby.dylib, not libruby18.dylib, when VENDOR_SPECIFIC is

@@ -1,0 +1,8 @@
+bin/ruby
+bin/erb
+bin/irb
+bin/rdoc
+bin/ri
+bin/testrb
+lib/libruby-static.a
+lib/libruby.dylib

@@ -1,0 +1,32 @@
+# $Id$
+
+PortSystem		1.0
+
+name			ruby_select
+version			0.2.1
+categories		sysutils
+platforms		darwin
+maintainers		kimuraw openmaintainer
+description		Switch the default ruby interpreter
+long_description \
+				ruby_select lets you switch the default ruby interpreter. \
+				ruby_select symlinks the standard ruby executables \
+				in the MacPorts prefix to the selected version. \
+				`ruby_select [ruby186|ruby18|ruby19]'
+
+homepage		http://svn.macports.org/repository/macports/contrib/select/
+master_sites	${homepage}
+distname 		select-${version}
+checksums		md5 8f270aadb2285df3b76b84536756bd5c \
+				sha1 9f2722940b566fa6ebd1c03298b8ddbdcbcc0554 \
+				rmd160 d8514a058f387e79ccd16a8f9a8ab83f2dc61fdc
+
+configure.args	--mandir=${prefix}/share/man --name=ruby
+
+# install all files
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/etc/select/ruby
+	xinstall -m 644 -W ${filespath} base none ruby18 \
+		${destroot}${prefix}/etc/select/ruby
+}
+
