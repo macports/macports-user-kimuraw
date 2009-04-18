@@ -48,6 +48,8 @@ patchfiles-append patch-node.h.diff
 
 # change rdoc "system" path to "system1.8.7"
 patchfiles-append patch-rdoc_sysdir.diff
+# linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
+patchfiles-append patch-libruby_nosuffix.diff
 
 use_autoconf	yes
 autoconf.cmd	autoreconf
@@ -55,10 +57,14 @@ autoconf.args	-fvi
 
 use_parallel_build		yes
 
+set suffix 18
+set ruby_rel 1.8.7
+
 configure.args	--enable-shared \
 				--mandir="${prefix}/share/man" \
 				--enable-pthread \
-				--with-vendordir=${prefix}/lib/ruby/vendor_ruby
+				--with-vendordir=${prefix}/lib/ruby/vendor_ruby \
+				--program-suffix=${suffix}
 # ignore minor version for archdir, like i686-darwin9
 configure.env	UNAME_RELEASE=${os.major}
 
@@ -66,8 +72,10 @@ post-configure {
 	# use lib/ruby/1.8.7, lib/ruby/1.8, to allow activate both of ruby186
 	# and ruby(ruby18).
 	# but use 1.8 for sitedir and vendordir (not change)
-	reinplace "s|lib/ruby/1.8|lib/ruby/1.8.7|g" ${worksrcpath}/config.h
-	reinplace "s|\$(libdir)/ruby/\$(ruby_version)|\$(libdir)/ruby/1.8.7|" ${worksrcpath}/mkconfig.rb
+	reinplace "s|lib/ruby/1.8|lib/ruby/${ruby_rel}|g" \
+		${worksrcpath}/config.h
+	reinplace "s|\$(libdir)/ruby/\$(ruby_version)|\$(libdir)/ruby/${ruby_rel}|" \
+		${worksrcpath}/mkconfig.rb
 }
 
 destroot.target	install install-doc
@@ -84,30 +92,25 @@ post-destroot {
 			destroot.keepdirs-append ${subdir}
 		}
 	}
-	# XXX ruby_select XXX
-	set suffix 18
-	foreach cmd [glob -type f ${destroot}${prefix}/bin/*] {
-		file rename ${cmd} ${cmd}${suffix}
-	    if {[file tail ${cmd}] != "ruby"} {
-		    reinplace "s|^#!${prefix}/bin/ruby|#!${prefix}/bin/ruby${suffix}|" \
-				${cmd}${suffix}
-		}
-	}
-	file rename ${destroot}${prefix}/share/man/man1/ruby.1 \
-		${destroot}${prefix}/share/man/man1/ruby${suffix}.1
-    # TODO: remove libruby.dylib, rename libruby-static.a
 }
 
 # create symlink for ruby18 and ,...
 # TODO: ruby_select would do this.
 post-activate {
-	set suffix 18
 	foreach cmd {ruby erb irb rdoc ri testrb} {
 		if {![file exists ${prefix}/bin/${cmd}]} {
 			file link -symbolic ${prefix}/bin/${cmd} \
 				${prefix}/bin/${cmd}${suffix}
 		}
 	}
+	if {![file exists ${prefix}/lib/libruby.dylib]} {
+			file link -symbolic ${prefix}/lib/libruby.dylib \
+				${prefix}/lib/libruby${suffix}.dylib
+    }
+	if {![file exists ${prefix}/lib/libruby-static.a]} {
+			file link -symbolic ${prefix}/lib/libruby-static.a \
+				${prefix}/lib/libruby${suffix}-static.a
+    }
 }
 
 variant universal {
