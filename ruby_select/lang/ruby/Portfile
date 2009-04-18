@@ -59,6 +59,14 @@ configure.args	--enable-shared \
 # ignore minor version for archdir, like i686-darwin9
 configure.env	UNAME_RELEASE=${os.major}
 
+post-configure {
+	# use lib/ruby/1.8.7, lib/ruby/1.8, to allow activate both of ruby186
+	# and ruby(ruby18).
+	# but use 1.8 for sitedir and vendordir (not change)
+	reinplace "s|lib/ruby/1.8|lib/ruby/1.8.7|g" ${worksrcpath}/config.h
+	reinplace "s|\$(libdir)/ruby/\$(ruby_version)|\$(libdir)/ruby/1.8.7|" ${worksrcpath}/mkconfig.rb
+}
+
 destroot.target	install install-doc
 post-destroot {
 	foreach type {site vendor} {
@@ -72,6 +80,28 @@ post-destroot {
 		foreach subdir [exec find ${libdir} -type d -empty] {
 			destroot.keepdirs-append ${subdir}
 		}
+	}
+	# XXX ruby_select XXX
+	set suffix 18
+	foreach cmd [glob -type f ${destroot}${prefix}/bin/*] {
+		file rename ${cmd} ${cmd}${suffix}
+	    if {[file tail ${cmd}] != "ruby"} {
+		    reinplace "s|^#!${prefix}/bin/ruby|#!${prefix}/bin/ruby${suffix}|" \
+				${cmd}${suffix}
+		}
+	}
+	file rename ${destroot}${prefix}/share/man/man1/ruby.1 \
+		${destroot}${prefix}/share/man/man1/ruby${suffix}.1
+    # TODO: remove libruby.dylib, rename libruby-static.a
+    # TODO: ri documents directory
+}
+
+# create symlink for ruby18 and ,...
+# TODO: ruby_select would do this.
+post-activate {
+	set suffix 18
+	foreach cmd {ruby erb irb rdoc ri testrb} {
+		file link -symbolic ${prefix}/bin/${cmd} ${prefix}/bin/${cmd}${suffix}
 	}
 }
 
