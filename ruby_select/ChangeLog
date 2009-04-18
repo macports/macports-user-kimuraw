@@ -1,5 +1,8 @@
 2009-04-18  kimura wataru <kimuraw>
 
+	* lang/ruby/Portfile, lang/ruby/files/patch-rdoc_sysdir.diff:
+	- use ${prefix}/share/ri/1.8/system1.8.7/ for rdoc sysdir
+
 	* lang/ruby/Portfile:
 	- rename bin/* -> bin/*18
 	- use lib/ruby/1.8.7, not lib/ruby/1.8

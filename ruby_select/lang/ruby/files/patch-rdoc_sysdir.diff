@@ -1,0 +1,22 @@
+--- instruby.rb.orig	2008-05-29 20:23:36.000000000 +0900
++++ instruby.rb	2009-04-18 17:09:09.000000000 +0900
+@@ -272,7 +272,7 @@
+   if $rdocdir
+     puts "installing rdoc"
+ 
+-    ridatadir = File.join(CONFIG['datadir'], 'ri/$(MAJOR).$(MINOR)/system')
++    ridatadir = File.join(CONFIG['datadir'], 'ri/$(MAJOR).$(MINOR)/system$(MAJOR).$(MINOR).$(TEENY)')
+     Config.expand(ridatadir)
+     makedirs [ridatadir]
+     install_recursive($rdocdir, ridatadir, :mode => $data_mode)
+--- lib/rdoc/ri/ri_paths.rb.orig	2007-12-24 16:22:01.000000000 +0900
++++ lib/rdoc/ri/ri_paths.rb	2009-04-18 16:26:43.000000000 +0900
+@@ -29,7 +29,7 @@
+     version = Config::CONFIG['ruby_version']
+ 
+     base    = File.join(Config::CONFIG['datadir'], "ri", version)
+-    SYSDIR  = File.join(base, "system")
++    SYSDIR  = File.join(base, "system" + RUBY_VERSION)
+     SITEDIR = File.join(base, "site")
+     homedir = ENV['HOME'] || ENV['USERPROFILE'] || ENV['HOMEPATH']
+ 

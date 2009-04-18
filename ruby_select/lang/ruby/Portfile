@@ -46,6 +46,9 @@ patchfiles		patch-vendordir.diff \
 # http://chopine.be/lrz/ruby-osx-patches/ignore-gsetcontext.diff
 patchfiles-append patch-node.h.diff
 
+# change rdoc "system" path to "system1.8.7"
+patchfiles-append patch-rdoc_sysdir.diff
+
 use_autoconf	yes
 autoconf.cmd	autoreconf
 autoconf.args	-fvi
@@ -93,7 +96,6 @@ post-destroot {
 	file rename ${destroot}${prefix}/share/man/man1/ruby.1 \
 		${destroot}${prefix}/share/man/man1/ruby${suffix}.1
     # TODO: remove libruby.dylib, rename libruby-static.a
-    # TODO: ri documents directory
 }
 
 # create symlink for ruby18 and ,...
@@ -101,7 +103,10 @@ post-destroot {
 post-activate {
 	set suffix 18
 	foreach cmd {ruby erb irb rdoc ri testrb} {
-		file link -symbolic ${prefix}/bin/${cmd} ${prefix}/bin/${cmd}${suffix}
+		if {![file exists ${prefix}/bin/${cmd}]} {
+			file link -symbolic ${prefix}/bin/${cmd} \
+				${prefix}/bin/${cmd}${suffix}
+		}
 	}
 }
 
