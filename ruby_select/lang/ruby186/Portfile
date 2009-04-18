@@ -43,12 +43,31 @@ patchfiles		patch-Makefile.in \
 				patch-lib-rexml-document.rb.diff \
 				patch-ext_openssl_openssl_missing.h.diff
 
+# change rdoc "system" path to "system1.8.7"
+patchfiles-append patch-rdoc_sysdir.diff
+# linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
+patchfiles-append patch-libruby_nosuffix.diff
+
 use_autoconf	yes
+
+set suffix 186
+set ruby_rel 1.8.6
 
 configure.args	--enable-shared \
 				--mandir="${prefix}/share/man" \
 				--enable-pthread \
-				--without-tk
+				--without-tk \
+				--program-suffix=${suffix}
+
+post-configure {
+	# use lib/ruby/1.8.6, not lib/ruby/1.8, to allow activate both of ruby186
+	# and ruby(ruby18).
+	# but use 1.8 for sitedir and vendordir (not change)
+	reinplace "s|lib/ruby/1.8|lib/ruby/${ruby_rel}|g" \
+		${worksrcpath}/config.h
+	reinplace "s|\$(libdir)/ruby/\$(ruby_version)|\$(libdir)/ruby/${ruby_rel}|" \
+		${worksrcpath}/mkconfig.rb
+}
 
 destroot.target	install install-doc
 post-destroot {
