@@ -1,3 +1,9 @@
+2009-04-19  kimura wataru <kimuraw>
+
+	* sysutils/ruby_select/Portfile:
+	- install dummy files for deactivate.
+	- add variants ruby186 and ruby18
+
 2009-04-18  kimura wataru <kimuraw>
 
 	* sysutils/ruby_select:
