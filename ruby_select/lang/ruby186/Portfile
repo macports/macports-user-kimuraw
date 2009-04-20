@@ -45,8 +45,8 @@ patchfiles		patch-Makefile.in \
 
 # change rdoc "system" path to "system1.8.6"
 patchfiles-append patch-rdoc_sysdir.diff
-## linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
-#patchfiles-append patch-libruby_nosuffix.diff
+# linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
+patchfiles-append patch-libruby_nosuffix.diff
 
 use_autoconf	yes
 
