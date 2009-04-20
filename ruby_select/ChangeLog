@@ -1,3 +1,10 @@
+2009-04-20  kimura wataru <kimuraw>
+
+	* lang/ruby186/files/patch-libruby_nosuffix.diff,
+	  lang/ruby18/files/patch-libruby_nosuffix.diff:
+	use libruby without suffix for LIBRUBYARG, LIBRUBYARG_SHARE, ..
+	when vendor-specific.rb enabled.
+
 2009-04-19  kimura wataru <kimuraw>
 
 	* sysutils/ruby_select/Portfile:

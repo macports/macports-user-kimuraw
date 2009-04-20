@@ -1,10 +1,14 @@
---- mkconfig.rb.orig	2009-04-18 18:08:27.000000000 +0900
-+++ mkconfig.rb	2009-04-18 18:10:28.000000000 +0900
-@@ -153,6 +153,7 @@
-     CONFIG["sitedir"] = CONFIG["vendordir"]
-     CONFIG["sitelibdir"] = CONFIG["vendorlibdir"]
-     CONFIG["sitearchdir"] = CONFIG["vendorarchdir"]
+--- mkconfig.rb.orig	2009-04-21 00:26:28.000000000 +0900
++++ mkconfig.rb	2009-04-21 00:35:59.000000000 +0900
+@@ -136,6 +136,11 @@
+ if $so_name
+   v_fast << "  CONFIG[\"RUBY_SO_NAME\"] = \"" + $so_name + "\"\n"
+ end
++v_fast << <<EOS
++  if defined?(VENDOR_SPECIFIC) && VENDOR_SPECIFIC
 +    CONFIG["RUBY_SO_NAME"] = "ruby"
-   end
-   CONFIG["topdir"] = File.dirname(__FILE__)
-   MAKEFILE_CONFIG = {}
++  end
++EOS
+ 
+ print(*v_fast)
+ print(*v_others)
