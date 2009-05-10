@@ -26,14 +26,15 @@ configure.args	--mandir=${prefix}/share/man --name=ruby
 
 # select any ruby by default.
 # users may change their `ruby' with ruby_select after install.
-variant ruby18 conflicts ruby186 description {select ruby18} {}
-variant ruby186 conflicts ruby18 description {select ruby186} {}
+variant ruby18 conflicts ruby186 ruby19 description {select ruby18} {}
+variant ruby186 conflicts ruby18 ruby19 description {select ruby186} {}
+variant ruby19 conflicts ruby18 ruby186 description {select ruby19} {}
 
 default_variants +ruby18
 
 post-destroot {
 	xinstall -m 755 -d ${destroot}${prefix}/etc/select/ruby
-	xinstall -m 644 -W ${filespath} base ruby18 ruby186 \
+	xinstall -m 644 -W ${filespath} base ruby18 ruby186 ruby19 \
 		${destroot}${prefix}/etc/select/ruby
 
 	# touch dummy files (bin/ruby,..) for uninstall
@@ -50,6 +51,8 @@ post-activate {
 	set selected ruby18
 	if {[variant_isset ruby186]} {
 		set selected ruby186
+	} elseif {[variant_isset ruby19]} {
+		set selected ruby19
 	}
 	system "${prefix}/bin/ruby_select ${selected}"
 }

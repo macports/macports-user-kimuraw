@@ -1,0 +1,8 @@
+bin/ruby1.9
+bin/erb1.9
+bin/irb1.9
+bin/rdoc1.9
+bin/ri1.9
+bin/testrb1.9
+lib/libruby1.9-static.a
+lib/libruby1.9.dylib
