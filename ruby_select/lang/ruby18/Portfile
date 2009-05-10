@@ -1,6 +1,7 @@
 # $Id$
 
 PortSystem 1.0
+PortGroup select 1.0
 
 name			ruby18
 version			1.8.7-p160
@@ -33,24 +34,28 @@ depends_lib		port:libiconv \
 				port:readline \
 				port:openssl \
 				port:zlib \
-				port:ncurses
+				port:ncurses \
+                port:ruby_select
 
-# vendordir: enable vendor-specific.rb
-# #3604: gcc4 fails to detect linking at configure
-# #19050: use $(CC) not cc, this change has been merged at ruby-1.8 trunk
-patchfiles		patch-vendordir.diff \
-				patch-bug3604.diff \
-				patch-bug19050.diff
+# # vendordir: enable vendor-specific.rb
+# # #3604: gcc4 fails to detect linking at configure
+# # #19050: use $(CC) not cc, this change has been merged at ruby-1.8 trunk
+# patchfiles		patch-vendordir.diff \
+# 				patch-bug3604.diff \
+# 				patch-bug19050.diff
 
-# ignore getcontext() and setcontext()
-# on 10.5, these functions have some problems (SEGV on ppc, slower than 1.8.6)
-# http://chopine.be/lrz/ruby-osx-patches/ignore-gsetcontext.diff
-patchfiles-append patch-node.h.diff
+# # ignore getcontext() and setcontext()
+# # on 10.5, these functions have some problems (SEGV on ppc, slower than 1.8.6)
+# # http://chopine.be/lrz/ruby-osx-patches/ignore-gsetcontext.diff
+# patchfiles-append patch-node.h.diff
 
-# change rdoc "system" path to "system1.8.7"
-patchfiles-append patch-rdoc_sysdir.diff
-# linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
-patchfiles-append patch-libruby_nosuffix.diff
+# # change rdoc "system" path to "system1.8.7"
+# patchfiles-append patch-rdoc_sysdir.diff
+# # linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
+# patchfiles-append patch-libruby_nosuffix.diff
+
+select.group     ruby
+select.file      ${filespath}/${name}
 
 use_autoconf	yes
 autoconf.cmd	autoreconf

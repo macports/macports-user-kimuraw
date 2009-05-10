@@ -1,6 +1,7 @@
 # $Id$
 
-PortSystem         1.0
+PortSystem     1.0
+PortGroup      select 1.0
 
 name		   ruby19
 version		   1.9.1-p0
@@ -24,15 +25,20 @@ use_bzip2          yes
 distname           ruby-${version}
 
 checksums          md5 0278610ec3f895ece688de703d99143e
+
+select.group     ruby
+select.file      ${filespath}/${name}
+
 use_parallel_build yes
 
 depends_lib	   port:libiconv \
 	port:readline \
 	port:openssl \
 	port:zlib \
-	port:ncurses
+	port:ncurses \
+	port:ruby_select
 
-configure.args     --enable-shared \
+configure.args --enable-shared \
 	--mandir="${prefix}/share/man" \
 	--enable-pthread \
 	--without-tk \

@@ -1,6 +1,7 @@
 # $Id$
 
 PortSystem 1.0
+PortGroup select 1.0
 
 name			ruby186
 version			1.8.6-p287
@@ -32,7 +33,8 @@ depends_lib		port:libiconv \
 				port:readline \
 				port:openssl \
 				port:zlib \
-				port:ncurses
+				port:ncurses \
+	            port:ruby_select
 
 patchfiles		patch-Makefile.in \
 				patch-configure.in \
@@ -47,6 +49,9 @@ patchfiles		patch-Makefile.in \
 patchfiles-append patch-rdoc_sysdir.diff
 # linking libruby.dylib not libruby${suffix}.dylib when VENDOR_SPECIFIC = true
 patchfiles-append patch-libruby_nosuffix.diff
+
+select.group     ruby
+select.file      ${filespath}/${name}
 
 use_autoconf	yes
 

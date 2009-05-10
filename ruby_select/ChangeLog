@@ -1,3 +1,15 @@
+2009-05-10  Florian Ebeling  <febeling@macports.org>
+
+	* lang/ruby18, lang/ruby186, lang/ruby19, sysutils/ruby_select:
+	- use port group 'select' to install select file.
+	- move select files from ruby_select port to providing port.
+	- introduce ruby-apple select group.
+
+2009-05-10  Florian Ebeling  <febeling@macports.org>
+
+	* sysutils/ruby_select:
+	- add select file for ruby19 port files.
+
 2009-04-20  kimura wataru <kimuraw>
 
 	* lang/ruby186/files/patch-libruby_nosuffix.diff,

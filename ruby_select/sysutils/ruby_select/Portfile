@@ -13,7 +13,7 @@ long_description \
 				ruby_select symlinks the standard ruby executables \
 				in the MacPorts prefix to the selected version. \
 				you can select your "ruby" with \
-					`ruby_select ruby186|ruby18|ruby19'
+					`ruby_select none|ruby-apple|ruby186|ruby18|ruby19'
 
 homepage		http://svn.macports.org/repository/macports/contrib/select/
 master_sites	${homepage}
@@ -24,36 +24,18 @@ checksums		md5 8f270aadb2285df3b76b84536756bd5c \
 
 configure.args	--mandir=${prefix}/share/man --name=ruby
 
-# select any ruby by default.
-# users may change their `ruby' with ruby_select after install.
-variant ruby18 conflicts ruby186 ruby19 description {select ruby18} {}
-variant ruby186 conflicts ruby18 ruby19 description {select ruby186} {}
-variant ruby19 conflicts ruby18 ruby186 description {select ruby19} {}
-
-default_variants +ruby18
-
 post-destroot {
 	xinstall -m 755 -d ${destroot}${prefix}/etc/select/ruby
-	xinstall -m 644 -W ${filespath} base ruby18 ruby186 ruby19 \
-		${destroot}${prefix}/etc/select/ruby
-
-	# touch dummy files (bin/ruby,..) for uninstall
-	set f [open ${filespath}/base]
-	set base [read $f]
-	close $f
-	set lines [split $base \n]
-	foreach entry ${lines} {
-		system "touch ${destroot}${prefix}/${entry}"
-	}
+	xinstall -m 644 -W ${filespath} base none ruby-apple ${destroot}${prefix}/etc/select/ruby
 }
 
-post-activate {
-	set selected ruby18
-	if {[variant_isset ruby186]} {
-		set selected ruby186
-	} elseif {[variant_isset ruby19]} {
-		set selected ruby19
-	}
-	system "${prefix}/bin/ruby_select ${selected}"
-}
+# post-activate {
+# 	set selected ruby18
+# 	if {[variant_isset ruby186]} {
+# 		set selected ruby186
+# 	} elseif {[variant_isset ruby19]} {
+# 		set selected ruby19
+# 	}
+# 	system "${prefix}/bin/ruby_select ${selected}"
+# }
 
