@@ -4,6 +4,7 @@
 	- use port group 'select' to install select file.
 	- move select files from ruby_select port to providing port.
 	- introduce ruby-apple select group.
+	- make ruby ports depend on ruby_select (see #19126).
 
 2009-05-10  Florian Ebeling  <febeling@macports.org>
 
