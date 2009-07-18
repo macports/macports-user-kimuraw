@@ -1,0 +1,54 @@
+# $Id: Rakefile 831 2008-07-19 13:25:03Z kimuraw $
+# utilitles for development MacPorts portfiles
+
+# 
+require 'fileutils'
+MACPORTS_SVN_URI = 'https://svn.macosforge.org/repository/macports/trunk/dports'
+
+# Rake tasks
+task :default => ["port:portindex"]
+
+desc %Q!"svn update" at top of port-tree!
+task :update do
+  sh 'svn update'
+end
+
+namespace "port" do
+  desc %Q!"portindex" at top of port-tree!
+  task :portindex do
+    sh 'portindex'
+  end
+
+#  desc %Q!usage: rake port:import dir=ruby/rb-rake\n! +
+#       %Q!       rake port:import dir=ruby/rb-rake,devel/subversion\n! +
+#       %Q!import portfile from macports' repository. !
+#  task :import do |t|
+#    unless dirs = ENV['dir']
+#      raise "Error: argument \`dir\' is required.\n" + t.full_comment
+#    end
+#    dirs.split(',').each do |port_path|
+#      puts "importing \"#{port_path}\"..."
+#      add_svn_external(port_path)
+#    end
+#    puts ''
+#    puts "import completed. please \`svn ci && svn up\'."
+#  end
+#
+#  def add_svn_external(port_path)
+#    unless system "port info #{port_path} > /dev/null 2>&1"
+#      raise "Error: port \"#{port_path}\" not found."
+#    end
+#    dir, portname = port_path.split('/')
+#    unless FileTest.directory?(dir)
+#      Dir.mkdir dir
+#      `svn add "#{dir}"`
+#    end
+#    if FileTest.exists?(port_path)
+#      raise "Error: directory \"#{port_path}\" already exists."
+#    end
+#    uri = MACPORTS_SVN_URI + "/#{dir}/#{portname}"
+#    curr_ext = `svn propget svn:externals #{dir}`.chomp('')
+#    system %Q!svn propset svn:externals "#{curr_ext}\n#{portname} #{uri}" #{dir}!
+#  end
+end
+
