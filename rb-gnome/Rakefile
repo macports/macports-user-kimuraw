@@ -1,5 +1,5 @@
 # $Id$
-# utilitles for development MacPorts portfiles
+# utilities for development of MacPorts portfiles
 
 # 
 require 'fileutils'
