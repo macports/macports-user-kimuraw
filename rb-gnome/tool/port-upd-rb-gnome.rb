@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# $Id: port-upd-rb-gnome.rb 132 2008-10-02 14:49:00Z kimuraw $
+# $Id$
 # upgrade all Portfiles of Ruby-Gnome2 modules; rb-glib2, rb-gtk2, ..
 # [usage] ./tool/port-upd-rb-gnome.rb tarball-path
 #
