@@ -57,7 +57,7 @@ EOS
     text = File.read(path)
     # update version at ruby.setup
     text[/ruby.setup\s+\{.*\}\s+(\S+)\s+extconf\.rb/m, 1] = self.version
-    # update chekcksums {md5/sha1/rmd160}
+    # update checksums {md5/sha1/rmd160}
     self.sums.each_pair do |type, sum|
       text[/\s+#{type}\s+([0-9a-f]+)/, 1] = sum
     end
