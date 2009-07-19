@@ -3,10 +3,10 @@ $Id$
 = what's this port tree?
 
 ruby gnome2 (port:rb-gnome) contains too many modules.
-the pureposs of this experimental port tree is to split rb-gnome into each
+the purpose of this experimental port tree is to split rb-gnome into each
 sub-modules like rb-glib2, rb-gtk2, ...
 
-I've been maintained these portfiles for Rabbit since 2007.
+I've maintained these portfiles for Rabbit since 2007.
 
 [1] http://raa.ruby-lang.org/project/rabbit/
 
@@ -39,7 +39,7 @@ rb-gtk2 contains gdkpixbuf2 and gtk2.
   * (NOT SUPPORT)    Ruby/PanelApplet: gnome-panel 2.6.0 or later (deprecated since 0.16.0)
   * rb-rsvg          Ruby/RSVG: librsvg 2.8.0 or later
 
-GtkMozEmbed is not found in officail ports.
+GtkMozEmbed is not found in official ports.
 
 === Experimental / Incomplete:
 
