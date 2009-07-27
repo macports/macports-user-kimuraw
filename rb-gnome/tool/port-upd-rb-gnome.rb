@@ -11,7 +11,8 @@ PORTFILES =
 	%w[rb-glib2 rb-atk rb-pango rb-gtk2 rb-rsvg rb-poppler 
 	   rb-gconf rb-gnomecanvas rb-libgnome rb-libart rb-gnomeprint
 	   rb-gnomeprintui rb-gnomevfs rb-gtkhtml rb-libglade2
-	   rb-gstreamer rb-vte rb-gnome-panel rb-gtkglext rb-gtksourceview2]
+	   rb-gstreamer rb-vte rb-gnome-panel rb-gtkglext rb-gtksourceview2
+	   rb-gnome-all]
 # TODO: GtkMozeEmbed[add]
 
 class App
@@ -56,7 +57,7 @@ EOS
     path = File.join('ruby', port, 'Portfile')
     text = File.read(path)
     # update version at ruby.setup
-    text[/ruby.setup\s+\{.*\}\s+(\S+)\s+extconf\.rb/m, 1] = self.version
+    text[/ruby.setup\s+\{.*\}\s+(\S+)\s+(extconf\.rb|fetch)/m, 1] = self.version
     # update checksums {md5/sha1/rmd160}
     self.sums.each_pair do |type, sum|
       text[/\s+#{type}\s+([0-9a-f]+)/, 1] = sum

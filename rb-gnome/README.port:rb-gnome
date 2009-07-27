@@ -39,6 +39,8 @@ rb-gtk2 contains gdkpixbuf2 and gtk2.
   * (NOT SUPPORT)    Ruby/PanelApplet: gnome-panel 2.6.0 or later (deprecated since 0.16.0)
   * rb-rsvg          Ruby/RSVG: librsvg 2.8.0 or later
 
+  * rb-poppler       Ruby/Poppler is a Ruby binding of poppler-glib.
+
 GtkMozEmbed is not found in official ports.
 
 Ruby/GtkSourceView is binding for GtkSourceView 1.0.x. the latest version of
