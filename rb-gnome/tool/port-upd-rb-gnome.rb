@@ -11,8 +11,8 @@ PORTFILES =
 	%w[rb-glib2 rb-atk rb-pango rb-gtk2 rb-rsvg rb-poppler 
 	   rb-gconf rb-gnomecanvas rb-libgnome rb-libart rb-gnomeprint
 	   rb-gnomeprintui rb-gnomevfs rb-gtkhtml rb-libglade2
-	   rb-gstreamer rb-vte rb-gnome-panel rb-gtkglext]
-# TODO: GtkMozeEmbed[add], GtkSourceView2[add]
+	   rb-gstreamer rb-vte rb-gnome-panel rb-gtkglext rb-gtksourceview2]
+# TODO: GtkMozeEmbed[add]
 
 class App
 

@@ -1,0 +1,27 @@
+# $Id$
+
+PortSystem		1.0
+PortGroup		ruby 1.0
+
+ruby.setup		{gnome-all ruby-gnome2} 0.19.0 fetch \
+				{ README NEWS } \
+				sourceforge:ruby-gnome2
+
+maintainers		kimuraw openmaintainer
+platforms		darwin
+description		Ruby-GNOME2 meta port. Ruby-GNOME2 is a set of Ruby \
+				language bindings for the GNOME 2.0 development environment.
+long_description	Ruby-GNOME2 meta port. Ruby-GNOME2 is a set of Ruby \
+				language bindings for the GNOME 2.0 development environment.
+categories-append	gnome
+depends_lib-append	port:rb-glib2 port:rb-atk port:rb-pango port:rb-gtk2 \
+				port:rb-gconf port:rb-libgnome port:rb-gnomecanvas \
+				port:rb-gnomeprint port:rb-gnomeprintui port:rb-gnomevfs \
+				port:rb-gtkhtml port:rb-gtkglext port:rb-gtksourceview2 \
+				port:rb-libart port:rb-libglade2 port:rb-rsvg
+
+distname		${ruby.project}-all-${version}
+checksums		md5 e293cf3e07f1d4e5da0020e45bea053e \
+				rmd160 fb56d0e3e63a82d56c7b9efdb859ededba0fbbce \
+				sha1 59e20b43a2592d63373bba72430e72ffd84e4f68
+
