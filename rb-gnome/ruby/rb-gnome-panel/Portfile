@@ -22,3 +22,7 @@ depends_lib-append	port:gnome-panel port:libgnome port:libgnomeui \
 				port:rb-gtk2 port:rb-glib2
 distname		${ruby.project}-all-${version}
 
+pre-destroot {
+	xinstall -d ${destroot}${prefix}/lib/pkgconfig
+}
+

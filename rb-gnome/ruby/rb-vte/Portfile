@@ -21,3 +21,7 @@ configure.args	--strict vte
 depends_lib-append	port:vte port:rb-gtk2
 distname		${ruby.project}-all-${version}
 
+pre-destroot {
+	xinstall -d ${destroot}${prefix}/lib/pkgconfig
+}
+
