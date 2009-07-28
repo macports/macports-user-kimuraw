@@ -36,7 +36,7 @@ rb-gtk2 contains gdkpixbuf2 and gtk2.
   * (NOT SUPPORT)    Ruby/GtkSourceView: GtkSourceView 1.0.1 or later
   * rb-libart        Ruby/Libart2: libart_lgpl 2.3.12 or later
   * rb-libglade2     Ruby/Libglade2: Libglade 2.0.x or later
-  * (NOT SUPPORT)    Ruby/PanelApplet: gnome-panel 2.6.0 or later (deprecated since 0.16.0)
+  * rb-gnome-panel   Ruby/PanelApplet: gnome-panel 2.6.0 or later (deprecated since 0.16.0)
   * rb-rsvg          Ruby/RSVG: librsvg 2.8.0 or later
 
   * rb-poppler       Ruby/Poppler is a Ruby binding of poppler-glib.
